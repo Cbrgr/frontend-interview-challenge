@@ -6,26 +6,14 @@
           <option>Active employees</option>
         </select>
       </div>
-      <div class="flex flex-col gap-8">
-        <div class="flex gap-20 px-24 h-40 items-center">
-          <div class="flex-1">
-            <p>Name</p>
-          </div>
-          <div class="flex-1 flex justify-end">
-            <p>Status</p>
-          </div>
-        </div>
-        <div class="flex gap-20 px-24 h-40 items-center">
-          <div class="flex-1">
-            <p>Michael J. Samuelson</p>
-          </div>
-          <div class="flex-1 flex justify-end">
-            <p>Active</p>
-          </div>
-        </div>
-      </div>
+      <Suspense>
+        <EmployeesList />
+        <template #fallback>Loading... </template>
+      </Suspense>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import EmployeesList from "./EmployeesList.vue";
+</script>
