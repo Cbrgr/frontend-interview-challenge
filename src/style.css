@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --spacing: 1px;
   --font-size-md-14: 0.875rem;
   --font-line-height-md-14: 1.25rem;
   --font-weight-md-14: 500;
