@@ -1,4 +1,6 @@
-export async function getEmployeeData() {
+import { EmployeesList } from "./types";
+
+export async function getEmployeeData(): Promise<EmployeesList> {
   const url = "http://localhost:9000/employees";
   try {
     const response = await fetch(url);
@@ -9,4 +11,5 @@ export async function getEmployeeData() {
   } catch (error: any) {
     console.error(error.message);
   }
+  return [];
 }
