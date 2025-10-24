@@ -1,27 +1,26 @@
 <template>
-  <div class="w-[1280px] mx-auto pt-24 font-inter">
+  <div class="w-[1280px] mx-auto pt-24">
     <div class="w-full flex flex-col gap-16">
       <div class="px-24">
-        <select @change="onChange($event)">
-          <option v-for="{ value, label } in filterList" :value="value">
-            {{ label }}
-          </option>
-        </select>
+        <label
+          class="text-sb-13 relative inline-flex items-center p-6 pl-12 shadow-regular-1 rounded-10"
+        >
+          <p>{{ activeFilter.label }}</p>
+          <img src="../assets/icons/chevron_down.svg" />
+          <select
+            @change="onChange($event)"
+            class="appearance-none opacity-0 absolute left-0 top-0 size-full p-8"
+          >
+            <option v-for="{ value, label } in filterList" :value="value">
+              {{ label }}
+            </option>
+          </select>
+        </label>
       </div>
-      <div class="flex flex-col gap-8">
-        <div class="flex gap-20 px-24 h-40 items-center">
-          <div class="flex-1 font-medium text-steel">
-            <p>Name</p>
-          </div>
-          <div class="flex-1 flex justify-end font-medium text-steel">
-            <p>Status</p>
-          </div>
-        </div>
-        <Suspense>
-          <EmployeesList :filter="activeFilter" />
-          <template #fallback><EmployeesListSkeleton /></template>
-        </Suspense>
-      </div>
+      <Suspense>
+        <EmployeesList :filter="activeFilter.value" />
+        <template #fallback><EmployeesListSkeleton /></template>
+      </Suspense>
     </div>
   </div>
 </template>
@@ -30,7 +29,9 @@
 import { ref } from "vue";
 import EmployeesList from "./EmployeesList.vue";
 import EmployeesListSkeleton from "./EmployeesListSkeleton.vue";
-import { Filter, FilterList } from "../types";
+import { FilterItem, FilterList } from "../types";
+
+const defaultFilterItem: FilterItem = { value: "ALL", label: "All employees" };
 
 const filterList: FilterList = [
   { value: "ALL", label: "All employees" },
@@ -38,10 +39,12 @@ const filterList: FilterList = [
   { value: "DEACTIVATED", label: "Deactivated employees" }
 ];
 
-const activeFilter = ref<Filter>("ALL");
+const activeFilter = ref<FilterItem>(defaultFilterItem);
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLSelectElement;
-  activeFilter.value = target.value as Filter;
+  activeFilter.value =
+    filterList.find((filterItem) => filterItem.value === target.value) ||
+    defaultFilterItem;
 };
 </script>
