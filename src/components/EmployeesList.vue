@@ -8,7 +8,11 @@
         <p>Status</p>
       </div>
     </div>
-    <EmployeeCard v-for="employee in employeeList" v-bind:employee="employee" />
+    <EmployeeCard
+      v-for="employee in employeeList"
+      v-bind:employee="employee"
+      :key="employee.id"
+    />
   </div>
 </template>
 
