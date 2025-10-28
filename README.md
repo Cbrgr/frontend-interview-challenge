@@ -47,3 +47,9 @@ By default the server will run on port 9000 and it exposes a single endpoint: `/
 - Start coding !
 
 If you have any question or if something is not clear, do not hesitate to ask!
+
+## Applicant comments ----- Going further
+
+- Improve state management -> Reactivity API ?
+- Use a more standardized component for the custom Select
+- Add an internal scroll to always show the status selector on top AND/OR apply a "sticky" positionning to the table head
